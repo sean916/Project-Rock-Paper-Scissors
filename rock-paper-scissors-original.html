@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Rock, Paper, Scissors</title>
+</head>
+<body>
+    <script>
+
+        // Return either 'rock', 'paper' or 'scissors'.
+        function computerPlay() {
+          choices = ['Rock', 'Paper', 'Scissors']
+          element = Math.floor(Math.random() * choices.length)
+          return choices[element]
+        }
+    
+       
+        function playRound(playerSelection, computerSelection) {
+          
+          playerSelection = playerSelection.toLowerCase();
+          computerSelection = computerSelection.toLowerCase();
+    
+          return decideWinner(playerSelection, computerSelection);
+        }
+    
+        function decideWinner(playerSelection, computerSelection) {
+          if( // player won
+              (playerSelection === 'rock' && computerSelection === 'scissors') ||
+              (playerSelection === 'paper' && computerSelection === 'rock') ||
+              (playerSelection === 'scissors' && computerSelection === 'paper')
+          ) {
+            return (`You won! ${playerSelection} beats ${computerSelection}`) 
+          } 
+          
+          else if ( // player loss
+              (playerSelection === 'rock' && computerSelection === 'paper') ||
+              (playerSelection === 'paper' && computerSelection === 'scissors') ||
+              (playerSelection === 'scissors' && computerSelection === 'rock')
+          ) {
+            return (`You lost. ${playerSelection} loses to ${computerSelection}`) 
+          } 
+          
+          else if(playerSelection === computerSelection) { // tie
+            return (`It's tie, ${playerSelection} and ${computerSelection}`)
+          } 
+          
+          else { 
+            return playRound(prompt("Enter your choice again"), computerPlay())
+          }
+        }
+    
+        function game() {
+            let userChoice = prompt("It's about to begin! Enter your choice!", "Enter Rock, Paper, or Scissors");
+            let computerChoice = computerPlay();
+    
+            alert(playRound(userChoice, computerChoice));
+
+            let another = prompt("Would you like to play another round?", "Yes")
+            if (another.toLowerCase() == "yes") {
+                game();
+            } else { 
+                alert("Goodbye!");
+            }
+
+        }
+        
+    
+        game();
+    
+      </script>
+</body>
+</html>
